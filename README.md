@@ -24,7 +24,7 @@ Friends
     id PK
     player_profile_id FK
     invite_status
-Player Games
+Player Game
     player_profile_id FK
     game_posting_id FK
 Game Posting 
