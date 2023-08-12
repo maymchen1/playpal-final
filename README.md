@@ -20,7 +20,7 @@ Player Profile
     username
     email
     password
-Friends
+Friend
     id PK
     player_profile_id FK
     invite_status
