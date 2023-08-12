@@ -33,8 +33,8 @@ minecraft.description = description3
 minecraft.save
 
 # Create Friends
-Friends.create(player_profile: may, friend: merty, invite_status: 'accepted')
-Friends.create(player_profile: may, friend: kevin, invite_status: 'pending')
+Friend.create(player_profile: may, friend: merty, invite_status: 'accepted')
+Friend.create(player_profile: may, friend: kevin, invite_status: 'pending')
 
 # Create Player Games
 player_profile = PlayerProfile.first
