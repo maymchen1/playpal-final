@@ -11,39 +11,42 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_08_12_232708) do
-  create_table "player_profiles", force: :cascade do |t|
-    t.string "username"
-    t.string "email"
-    t.string "password"
-    t.timestamps
-  end
-
-  create_table "game_postings", force: :cascade do |t|
-    t.string "title"
-    t.timestamps
-  end
-
-  create_table "friends", force: :cascade do |t|
-    t.integer "player_profile_id"
-    t.string "invite_status"
-    t.timestamps
-  end
-
   create_table "descriptions", force: :cascade do |t|
-    t.integer "game_posting_id"
     t.string "genre"
     t.integer "player_limit"
     t.text "description_text"
     t.string "description_title"
-    t.timestamps
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "friends", force: :cascade do |t|
+    t.string "invite_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "game_postings", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "player_games", force: :cascade do |t|
     t.integer "player_profile_id"
     t.integer "game_posting_id"
-    t.timestamps
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["game_posting_id"], name: "index_player_games_on_game_posting_id"
     t.index ["player_profile_id"], name: "index_player_games_on_player_profile_id"
+  end
+
+  create_table "player_profiles", force: :cascade do |t|
+    t.string "username"
+    t.string "email"
+    t.string "password"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "player_games", "game_postings"
