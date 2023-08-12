@@ -1,9 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  player_profile_id: one
-  game_posting_id: one
+  player_profile: one
+  game_posting: one
 
 two:
-  player_profile_id: two
-  game_posting_id: two
+  player_profile: two
+  game_posting: two

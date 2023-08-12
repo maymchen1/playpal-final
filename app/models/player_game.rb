@@ -1,4 +1,4 @@
 class PlayerGame < ApplicationRecord
-  belongs_to :player_profile_id
-  belongs_to :game_posting_id
+  belongs_to :player_profile
+  belongs_to :game_posting
 end
