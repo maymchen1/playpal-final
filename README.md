@@ -44,6 +44,7 @@ Include full CRUD on at least 1 model, following REST conventions.
 
 Player Profile 
 Game Posting 
+Description
 
 Implement validations and error handling.
 Implement something new not taught in the curriculum. (Check in with your instructor to ensure the scope of your idea is appropriate.)

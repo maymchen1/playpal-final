@@ -1,0 +1,2 @@
+class GamePosting < ApplicationRecord
+end
