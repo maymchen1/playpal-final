@@ -36,4 +36,13 @@ minecraft.save
 friendship1 = Friends.create(player_profile: may, friend: merty, invite_status: 'accepted')
 friendship2 = Friends.create(player_profile: may, friend: kevin, invite_status: 'pending')
 
+# Create Player Games
+player_profile = PlayerProfile.first
+game_posting = GamePosting.first
+
+PlayerGame.create(player_profile: player_profile, game_posting: game_posting)
+
+# Create more seed data as needed
+
+
 puts 'Seeding completed!'
