@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_13_001342) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_13_233138) do
   create_table "descriptions", force: :cascade do |t|
     t.string "genre"
     t.integer "player_limit"
@@ -26,6 +26,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_13_001342) do
     t.string "invite_status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "player_profile_id"
+    t.index ["player_profile_id"], name: "index_friends_on_player_profile_id"
   end
 
   create_table "game_postings", force: :cascade do |t|
@@ -52,6 +54,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_13_001342) do
   end
 
   add_foreign_key "descriptions", "game_postings"
+  add_foreign_key "friends", "player_profiles"
   add_foreign_key "player_games", "game_postings"
   add_foreign_key "player_games", "player_profiles"
 end
