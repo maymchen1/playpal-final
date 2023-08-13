@@ -4,7 +4,7 @@
 PlayerGame.delete_all
 Description.delete_all
 GamePosting.delete_all
-Friends.delete_all
+Friend.delete_all
 PlayerProfile.delete_all
 
 # Create PlayerProfiles
