@@ -42,6 +42,7 @@ game_posting = GamePosting.first
 
 PlayerGame.create(player_profile: player_profile, game_posting: game_posting)
 
+
 # Create more seed data as needed
 
 

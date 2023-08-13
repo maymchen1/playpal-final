@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_12_232708) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_13_001342) do
   create_table "descriptions", force: :cascade do |t|
     t.string "genre"
     t.integer "player_limit"
@@ -18,6 +18,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_12_232708) do
     t.string "description_title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "game_posting_id"
+    t.index ["game_posting_id"], name: "index_descriptions_on_game_posting_id"
   end
 
   create_table "friends", force: :cascade do |t|
@@ -49,6 +51,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_12_232708) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "descriptions", "game_postings"
   add_foreign_key "player_games", "game_postings"
   add_foreign_key "player_games", "player_profiles"
 end
