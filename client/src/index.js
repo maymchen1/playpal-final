@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Route } from 'react-router-dom';
+import { AuthProvider } from './Auth';
 import Home from './components/Home';
 import GamePostings from './components/GamePostings';
 import PlayerProfiles from './components/PlayerProfiles';
@@ -10,12 +11,14 @@ import Friends from './components/Friends';
 // Import other components as needed
 
 ReactDOM.render(
+  <Auth>
   <div>
-      <Route path="/" exact component={Home} />
-      <Route path="/gamepostings" component={GamePostings} />
-      <Route path="/playerprofiles" component={PlayerProfiles} />
-      <Route path="/descriptions" component={Descriptions} />
-      <Route path="/friends" component={Friends} />
-      </div>,
+      <Home/>
+      <GamePostings/>
+      <PlayerProfiles/>
+      <Descriptions/>
+      <Friends/>
+      </div>
+      </Auth>,
   document.getElementById('root')
 );
