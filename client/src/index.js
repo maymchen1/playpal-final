@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import Home from './components/Home';
 import GamePostings from './components/GamePostings';
 import PlayerProfiles from './components/PlayerProfiles';
@@ -10,14 +10,12 @@ import Friends from './components/Friends';
 // Import other components as needed
 
 ReactDOM.render(
-  <Router>
-    <Switch>
+  <div>
       <Route path="/" exact component={Home} />
       <Route path="/gamepostings" component={GamePostings} />
       <Route path="/playerprofiles" component={PlayerProfiles} />
       <Route path="/descriptions" component={Descriptions} />
       <Route path="/friends" component={Friends} />
-    </Switch>
-  </Router>,
+      </div>,
   document.getElementById('root')
 );
