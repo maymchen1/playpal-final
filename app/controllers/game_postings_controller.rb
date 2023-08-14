@@ -42,6 +42,9 @@ class GamePostingsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_game_posting
       @game_posting = GamePosting.find(params[:id])
+      if @game_posting.nil?
+        render json: { error: "Game posting not found" }, status: :not_found
+      end
     end
 
     # Only allow a list of trusted parameters through.

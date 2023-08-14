@@ -41,7 +41,10 @@ class PlayerProfilesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_player_profile
-      @player_profile = PlayerProfile.find(params[:id])
+      @player_profile = PlayerProfile.find_by(id: params[:id])
+      if @player_profile.nil?
+        render json: { error: "Player profile not found" }, status: :not_found
+      end
     end
 
     # Only allow a list of trusted parameters through.
