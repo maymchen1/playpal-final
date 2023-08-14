@@ -5,12 +5,12 @@ class GamePostingsController < ApplicationController
   def index
     @game_postings = GamePosting.all
 
-    render json: @game_postings
+    render json: @game_postings , only: [:id, :title]
   end
 
   # GET /game_postings/1
   def show
-    render json: @game_posting
+    render json: @game_posting , only: [:id, :title]
   end
 
   # POST /game_postings

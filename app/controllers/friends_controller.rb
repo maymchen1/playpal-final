@@ -5,12 +5,12 @@ class FriendsController < ApplicationController
   def index
     @friends = Friend.all
 
-    render json: @friends
+    render json: @friends, only: [:id, :invite_status, :player_profile_id]
   end
 
   # GET /friends/1
   def show
-    render json: @friend
+    render json: @friend [:id, :invite_status, :player_profile_id]
   end
 
   # POST /friends
