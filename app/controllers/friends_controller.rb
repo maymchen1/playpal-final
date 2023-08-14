@@ -41,7 +41,10 @@ class FriendsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_friend
-      @friend = Friend.find(params[:id])
+      @friend = Friend.find_by(id: params[:id])
+      if @friend.nil?
+        render json: { error: "Friend not found" }, status: :not_found
+      end
     end
 
     # Only allow a list of trusted parameters through.

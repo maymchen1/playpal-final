@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
     def index
-        render plain: "Welcome to the PlayPal"
+        render plain: "Welcome to PlayPal" 
     end
 end
