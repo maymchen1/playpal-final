@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Home() {
-  return <div>Welcome to PlayPal!</div>;
+  return <div><h1>Welcome to PlayPal!</h1></div>;
 }
 
 export default Home;

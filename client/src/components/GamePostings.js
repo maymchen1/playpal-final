@@ -1,7 +1,9 @@
 import React from 'react';
 
 function GamePostings() {
-  return <div>Here are the available game postings. GGs!</div>;
+  return <div>
+    <button>View Game Postings</button>
+    </div>;
 }
 
 export default GamePostings;
