@@ -12,7 +12,6 @@ function GamePostings() {
 
   return (
     <div>
-      <button><p2>Game Postings</p2></button>
         {gamePostings.map(game_posting => (
           <li key={game_posting.id}>{game_posting.title}</li>
         ))}
