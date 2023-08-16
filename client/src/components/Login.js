@@ -10,15 +10,22 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const success = await login(username, password);
-    if (success) {
+    const response = await fetch('http://localhost:3000/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password }),
+    });
+
+    if (response.ok) {
       console.log('Login successful');
-      history.push('/friends'); // Redirect to the Friends page
+      // Update AuthContext and redirect or show a success message
     } else {
       console.log('Login failed');
+      // Handle error response
     }
   };
-
   return (
     <div>
       <h2>Login</h2>
