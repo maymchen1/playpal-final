@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { useAuth } from '../AuthContext';
-import { useHistory } from 'react-router-dom'; // Import useHistory
+import { useHistory } from 'react-router-dom';
 
 const Login = () => {
   const { login } = useAuth();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const history = useHistory(); // Initialize useHistory
+  const [loginError, setLoginError] = useState(false);
+  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const response = await fetch('http://localhost:3000/login', {
       method: 'POST',
       headers: {
@@ -17,15 +19,29 @@ const Login = () => {
       },
       body: JSON.stringify({ username, password }),
     });
+    
+    if (response.status === 200) {
+      const responseData = await response.json();
+      console.log('Response data:', responseData);
 
-    if (response.ok) {
-      console.log('Login successful');
+    console.log('Response status:', response.status);
+
       // Update AuthContext and redirect or show a success message
+      const success = await login(username, password); // Use your login function from AuthContext
+      if (success) {
+        console.log('Login successful');
+        history.push('/'); // Redirect to the explore page
+      } else {
+        console.log('Login failed');
+        // Handle login failure, show error message, etc.
+      }
     } else {
-      console.log('Login failed');
+      const errorData = await response.json();
+      console.log('Login failed. Error data:', errorData);
       // Handle error response
     }
   };
+
   return (
     <div>
       <h2>Login</h2>

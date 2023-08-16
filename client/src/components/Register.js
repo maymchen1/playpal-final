@@ -27,3 +27,5 @@ const Register = () => {
 
   // JSX for the registration form
 }
+
+export default Register;

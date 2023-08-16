@@ -9,22 +9,23 @@ export const AuthProvider = ({ children }) => {
 
   // Authentication functions
   const login = async (username, password) => {
-    const response = await fetch('http://localhost:3000/player_profiles', {
+    const response = await fetch('http://localhost:3000/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ username, password }),
     });
-
-    if (response.ok) {
-      const userData = await response.json();
-      setUser(userData); // Set user data here
+  
+    const responseData = await response.json();
+  
+    if (responseData.success) {
+      setUser(responseData.userData); // Set user data here
       return true;
     }
     return false;
   };
-
+  
   const logout = () => {
     setUser(null); // Clear user data
   };
