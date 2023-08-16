@@ -5,6 +5,7 @@ class PlayerProfile < ApplicationRecord
     has_many :friend
 
     validates :username, presence: true
-    validates :password, presence: true
     validates :email, presence:true
+
+    has_secure_password
 end

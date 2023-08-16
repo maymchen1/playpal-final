@@ -11,7 +11,11 @@ function Home() {
       <h1>Welcome to PlayPal!</h1>
       <Link to="/gamepostings">
         <ul></ul>
-        <button>Explore Game Postings</button>
+        <button>Explore Game Titles</button>
+      </Link>
+      <Link to="/descriptions">
+        <ul></ul>
+        <button>Explore Post Descriptions</button>
       </Link>
       <Link to="/playerprofiles">
         <ul></ul>

@@ -5,7 +5,7 @@ function Descriptions() {
 
   useEffect(() => {
     // Fetch descriptions from Rails API
-    fetch('http://localhost:3000/api/descriptions')
+    fetch('http://localhost:3000/descriptions')
       .then(response => response.json())
       .then(data => setDescriptions(data))
       .catch(error => console.error(error));

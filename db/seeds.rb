@@ -7,11 +7,13 @@ GamePosting.delete_all
 Friend.delete_all
 PlayerProfile.delete_all
 
-# Create PlayerProfiles
-may = PlayerProfile.create(id: '1', username: 'may', password: 'password1', email: 'may@mail.com')
-merty = PlayerProfile.create(id: '2',username: 'merty', password: 'password2', email: 'merty@mail.com')
-kevin = PlayerProfile.create(id: '3',username: 'kevin', password: 'password3', email: 'kevin@mail.com')
-crystal = PlayerProfile.create(id: '4',username: 'crystal', password: 'password3', email: 'crystal@mail.com')
+# Create PlayerProfiles with hashed passwords
+may = PlayerProfile.create(id: '1', username: 'may', password: 'password1', password_confirmation: 'password1', email: 'may@mail.com')
+merty = PlayerProfile.create(id: '2', username: 'merty', password: 'password2', password_confirmation: 'password2', email: 'merty@mail.com')
+kevin = PlayerProfile.create(id: '3', username: 'kevin', password: 'password3', password_confirmation: 'password3', email: 'kevin@mail.com')
+crystal = PlayerProfile.create(id: '4', username: 'crystal', password: 'password4', password_confirmation: 'password4', email: 'crystal@mail.com')
+
+# ... (rest of the code)
 
 # Create GamePostings with Descriptions
 valorant = GamePosting.create(id: '1',title: 'Valorant')

@@ -1,5 +1,6 @@
 class PlayerProfilesController < ApplicationController
   before_action :set_player_profile, only: %i[ show update destroy ]
+  before_action :authenticate, only: [:show, :update, :destroy]
 
   # GET /player_profiles
   def index
@@ -49,6 +50,6 @@ class PlayerProfilesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def player_profile_params
-      params.require(:player_profile).permit(:username, :email, :password)
+      params.require(:player_profile).permit(:username, :email, :password, :password_confirmation)
     end
 end

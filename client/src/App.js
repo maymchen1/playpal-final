@@ -6,6 +6,7 @@ import PlayerProfiles from './components/PlayerProfiles';
 import Descriptions from './components/Descriptions'; 
 import Friends from './components/Friends';
 import Login from './components/Login';
+import Register from './components/Register';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/Descriptions" component={Descriptions} />
         <Route path="/Friends" component={Friends} />
         <Route path="/Login" component={Login} />
+        <Route path="/Register" component={Register} />
         </Switch>
   );
 }
