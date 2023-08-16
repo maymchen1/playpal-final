@@ -7,6 +7,7 @@ import Descriptions from './components/Descriptions';
 import Friends from './components/Friends';
 import Login from './components/Login';
 import Register from './components/Register';
+import Dashboard from './components/Dashboard';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/Friends" component={Friends} />
         <Route path="/Login" component={Login} />
         <Route path="/Register" component={Register} />
+        <Route path="/dashboard" component={Dashboard} />
         </Switch>
   );
 }

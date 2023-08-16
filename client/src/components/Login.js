@@ -30,14 +30,16 @@ const Login = () => {
       const success = await login(username, password); // Use your login function from AuthContext
       if (success) {
         console.log('Login successful');
-        history.push('/'); // Redirect to the explore page
+        history.push('/dashboard'); // Redirect to the dashboard page
       } else {
         console.log('Login failed');
+        setLoginError(true); // Set the login error state
         // Handle login failure, show error message, etc.
       }
     } else {
       const errorData = await response.json();
       console.log('Login failed. Error data:', errorData);
+      setLoginError(true);
       // Handle error response
     }
   };
@@ -45,6 +47,11 @@ const Login = () => {
   return (
     <div>
       <h2>Login</h2>
+      {loginError && (
+        <div>
+          <p><b>Login failed. Please try again.</b></p>
+        </div>
+      )}
       <form onSubmit={handleSubmit}>
         <input
           type="text"

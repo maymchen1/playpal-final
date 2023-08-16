@@ -1,21 +1,21 @@
 class FriendsController < ApplicationController
-  before_action :set_friend, only: %i[ show update destroy ]
+  before_action :set_player_profile
+  before_action :set_friend, only: %i[show update destroy]
 
-  # GET /friends
+  # GET /player_profiles/:player_profile_id/friends
   def index
-    @friends = Friend.all
-
+    @friends = @player_profile.friends
     render json: @friends, only: [:id, :invite_status, :player_profile_id]
   end
 
-  # GET /friends/1
+  # GET /player_profiles/:player_profile_id/friends/:id
   def show
-    render json: @friend [:id, :invite_status, :player_profile_id]
+    render json: @friend, only: [:id, :invite_status, :player_profile_id]
   end
 
-  # POST /friends
+  # POST /player_profiles/:player_profile_id/friends
   def create
-    @friend = Friend.new(friend_params)
+    @friend = @player_profile.friends.build(friend_params)
 
     if @friend.save
       render json: @friend, status: :created, location: @friend
@@ -24,7 +24,7 @@ class FriendsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /friends/1
+  # PATCH/PUT /player_profiles/:player_profile_id/friends/:id
   def update
     if @friend.update(friend_params)
       render json: @friend
@@ -33,22 +33,28 @@ class FriendsController < ApplicationController
     end
   end
 
-  # DELETE /friends/1
+  # DELETE /player_profiles/:player_profile_id/friends/:id
   def destroy
     @friend.destroy
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_friend
-      @friend = Friend.find_by(id: params[:id])
-      if @friend.nil?
-        render json: { error: "Friend not found" }, status: :not_found
-      end
-    end
 
-    # Only allow a list of trusted parameters through.
-    def friend_params
-      params.require(:friend).permit(:invite_status)
+  def set_player_profile
+    @player_profile = PlayerProfile.find_by(id: params[:player_profile_id])
+    if @player_profile.nil?
+      render json: { error: "Player profile not found" }, status: :not_found
     end
+  end
+
+  def set_friend
+    @friend = @player_profile.friends.find_by(id: params[:id])
+    if @friend.nil?
+      render json: { error: "Friend not found" }, status: :not_found
+    end
+  end
+
+  def friend_params
+    params.require(:friend).permit(:username, :invite_status)
+  end
 end

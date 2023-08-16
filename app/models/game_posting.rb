@@ -1,6 +1,6 @@
 class GamePosting < ApplicationRecord
-    has_many :player_game
-    has_many :player_profile, through: :player_game
+    has_many :player_games
+    has_many :player_profiles, through: :player_games
 
     has_one :description 
 
