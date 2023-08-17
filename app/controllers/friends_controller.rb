@@ -6,6 +6,7 @@ class FriendsController < ApplicationController
   def index
     @friends = Friend.where(player_profile: params[:player_profile_id])
     # @friends = @player_profile.friends
+    
     render json: @friends
   end
 

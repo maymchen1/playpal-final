@@ -64,16 +64,19 @@ const Dashboard = () => {
           ))}
         </ul>
       </div>
-      {/* <div>
-        <h3>Your Game Postings</h3>
-        <ul>
-          {gamePostings.map((posting) => (
-            <li key={posting.id}>
-              {posting.game_posting.title} - {posting.game_posting.description_title}
-            </li>
-          ))}
-        </ul>
-      </div> */}
+      <div>
+  <h3>Your Game Postings</h3>
+  <ul>
+    {Array.from(new Set(gamePostings.map(posting => posting.game_posting_id))).map((uniqueGamePostingId) => (
+      <li key={uniqueGamePostingId}>
+        Game Posting: {uniqueGamePostingId}
+      </li>
+    ))}
+  </ul>
+</div>
+
+
+
     </div>
   );
 };

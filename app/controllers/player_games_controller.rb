@@ -8,8 +8,6 @@ class PlayerGamesController < ApplicationController
       render json: @player_games, only: [:id, :game_posting_id, :player_profile_id]
     end
   
-    # Other actions (show, update, destroy) here
-  
     private
   
     def set_player_profile
