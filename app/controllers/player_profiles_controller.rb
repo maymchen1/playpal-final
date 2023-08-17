@@ -39,7 +39,13 @@ class PlayerProfilesController < ApplicationController
       render json: @player_profile.errors, status: :unprocessable_entity
     end
   end
-  
+
+  # DELETE /player_profiles/1
+  def destroy
+    @player_profile.destroy
+    render json: { message: "Account deleted successfully" }
+  end
+
   private
   
   def player_profile_params
@@ -47,11 +53,7 @@ class PlayerProfilesController < ApplicationController
   end
   
 
-  # DELETE /player_profiles/1
-  def destroy
-    @player_profile.destroy
-    render json: { message: "Account deleted successfully" }
-  end
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.

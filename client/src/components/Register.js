@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [email, setEmail] = useState('');
+  const history = useHistory();
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,7 +30,7 @@ const Register = () => {
 
     if (response.ok) {
       console.log('Registration successful');
-      // Redirect or show a success message
+      history.push('/login');
     } else {
       console.log('Registration failed');
       // Handle error response

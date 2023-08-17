@@ -7,6 +7,11 @@ class PlayerGamesController < ApplicationController
       @player_games = @player_profile.player_games
       render json: @player_games, only: [:id, :game_posting_id, :player_profile_id]
     end
+    
+    def destroy
+    @player_game.destroy
+    render json: { message: "Player game was successfully deleted" }
+  end
   
     private
   
