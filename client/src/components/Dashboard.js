@@ -7,6 +7,7 @@ const Dashboard = () => {
   const [friends, setFriends] = useState([]);
   const [gamePostings, setGamePostings] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [editedUsername, setEditedUsername] = useState(''); 
 
   useEffect(() => {
     if (user) {
@@ -22,10 +23,12 @@ const Dashboard = () => {
       const response = await fetch(`http://localhost:3000/player_profiles/${user.id}/friends`);
       const data = await response.json();
       setFriends(data);
+      setEditedUsername(data.username);
       console.log(data);
     } catch (error) {
       console.error('Error fetching friends:', error);
     }
+    
   };
 
   const fetchGamePostings = async () => {
@@ -34,6 +37,7 @@ const Dashboard = () => {
       const response = await fetch(`http://localhost:3000/player_profiles/${user.id}/player_games`);
       const data = await response.json();
       setGamePostings(data);
+      setEditedUsername(data.username);
       console.log(data);
     } catch (error) {
       console.error('Error fetching game postings:', error);
@@ -42,6 +46,43 @@ const Dashboard = () => {
     }
   };
 
+  const handleDeleteAccount = async () => {
+    const response = await fetch(`http://localhost:3000/player_profiles/${user.id}`, {
+      method: 'DELETE',
+    });
+  
+    if (response.ok) {
+      console.log('Account deleted successfully');
+      // Redirect or show a success message
+    } else {
+      console.log('Account deletion failed');
+      // Handle error response
+    }
+  };
+
+  const handleUsernameEdit = async () => {
+    const response = await fetch(`http://localhost:3000/player_profiles/${user.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        player_profile: {
+          username: editedUsername,
+        },
+      }),
+    });
+    if (response.ok) {
+        console.log('Username updated successfully');
+        // Refresh friends and game postings
+        fetchFriends();
+        fetchGamePostings();
+      } else {
+        console.log('Username update failed');
+        // Handle error response
+      }
+    };
+  
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -72,7 +113,18 @@ const Dashboard = () => {
               ))}
             </ul>
           </div>
+          <div><p>
+            <input
+              type="text"
+              value={editedUsername}
+              onChange={(e) => setEditedUsername(e.target.value)}
+            />
+            <button onClick={handleUsernameEdit}>Update Username</button></p>
+          </div>
           <button onClick={logout}>Logout</button>
+          <p></p>
+          <button onClick={handleDeleteAccount}>DELETE ACCOUNT - THIS ACTION IS IRREVERSIBLE </button>
+
         </>
       ) : (
         <div>

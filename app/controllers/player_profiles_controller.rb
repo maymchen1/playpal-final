@@ -1,6 +1,6 @@
 class PlayerProfilesController < ApplicationController
   before_action :set_player_profile, only: %i[ show update destroy ]
-  before_action :authenticate, only: [:show, :update, :destroy]
+  before_action :authenticate, only: [:show]
 
   # GET /player_profiles
   def index
@@ -31,12 +31,21 @@ class PlayerProfilesController < ApplicationController
 
   # PATCH/PUT /player_profiles/1
   def update
+    @player_profile = PlayerProfile.find(params[:id])
+  
     if @player_profile.update(player_profile_params)
-      render json: @player_profile
+      render json: @player_profile, status: :ok
     else
       render json: @player_profile.errors, status: :unprocessable_entity
     end
   end
+  
+  private
+  
+  def player_profile_params
+    params.require(:player_profile).permit(:username)
+  end
+  
 
   # DELETE /player_profiles/1
   def destroy
