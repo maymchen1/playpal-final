@@ -53,6 +53,7 @@ const Dashboard = () => {
   
     if (response.ok) {
       console.log('Account deleted successfully');
+      alert('Account deleted successfully'); // Show an alert
     } else {
       console.log('Account deletion failed');
       // Handle error response
