@@ -4,8 +4,9 @@ class FriendsController < ApplicationController
 
   # GET /player_profiles/:player_profile_id/friends
   def index
-    @friends = @player_profile.friends
-    render json: @friends, only: [:id, :invite_status, :player_profile_id]
+    @friends = Friend.where(player_profile: params[:player_profile_id])
+    # @friends = @player_profile.friends
+    render json: @friends
   end
 
   # GET /player_profiles/:player_profile_id/friends/:id

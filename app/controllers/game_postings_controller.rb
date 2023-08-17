@@ -38,11 +38,11 @@ class GamePostingsController < ApplicationController
 
   # GET /player_profiles/:player_profile_id/game_postings
   def game_postings_by_profile
-    @player_profile = PlayerProfile.find_by(id: params[:player_profile_id])
+    @player_profile = PlayerProfile.where(id: params[:player_profile_id])
     
     if @player_profile
       @game_postings = @player_profile.game_postings
-      render json: @game_postings, only: [:id, :title]
+      render json: @game_postings
     else
       render json: { error: "Player profile not found" }, status: :not_found
     end

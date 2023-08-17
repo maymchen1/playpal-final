@@ -7,8 +7,8 @@ const Dashboard = () => {
   const [gamePostings, setGamePostings] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (user) {
+  useEffect(() => { 
+        if (user) {
       console.log('User in Dashboard:', user);
       fetchFriends();
       fetchGamePostings();
@@ -18,22 +18,24 @@ const Dashboard = () => {
   const fetchFriends = async () => {
     try {
       console.log('Fetching friends...');
-      const response = await fetch(`http://localhost:3000/player_profiles/${user.player_profile_id}/friends`);
+      const response = await fetch(`http://localhost:3000/player_profiles/${user.id}/friends`);
       const data = await response.json();
       setFriends(data);
+      console.log (data)
     } catch (error) {
       console.error('Error fetching friends:', error);
-    } finally {
-      setLoading(false); // Set loading to false after fetching data
+    // } finally {
+    //   setLoading(false); // Set loading to false after fetching data
     }
   };
   
   const fetchGamePostings = async () => {
     try {
       console.log('Fetching game postings...');
-      const response = await fetch(`http://localhost:3000/player_profiles/${user.player_profile_id}/player_games`);
+      const response = await fetch(`http://localhost:3000/player_profiles/${user.id}/player_games`);
       const data = await response.json();
       setGamePostings(data);
+      console.log (data)
     } catch (error) {
       console.error('Error fetching game postings:', error);
     } finally {
@@ -57,12 +59,12 @@ const Dashboard = () => {
         <ul>
           {friends.map((friend) => (
             <li key={friend.id}>
-              {friend.friend.username} - {friend.invite_status}
+              {friend.id} - {friend.invite_status}
             </li>
           ))}
         </ul>
       </div>
-      <div>
+      {/* <div>
         <h3>Your Game Postings</h3>
         <ul>
           {gamePostings.map((posting) => (
@@ -71,7 +73,7 @@ const Dashboard = () => {
             </li>
           ))}
         </ul>
-      </div>
+      </div> */}
     </div>
   );
 };

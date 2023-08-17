@@ -21,6 +21,7 @@ export const AuthProvider = ({ children }) => {
     const responseData = await response.json();
 
     if (responseData.success) {
+      console.log (responseData)
       setUser(responseData.userData); // Set user data here
       setLoading(false); // Set loading to false once user is set
       return true;

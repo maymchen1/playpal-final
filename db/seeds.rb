@@ -8,7 +8,7 @@ Friend.delete_all
 PlayerProfile.delete_all
 
 # Create PlayerProfiles with hashed passwords
-may = PlayerProfile.create(id: '1', username: 'may', password: 'password1', password_confirmation: 'password1', email: 'may@mail.com')
+may = PlayerProfile.create(id: '1', username: 'may', password: '1', password_confirmation: '1', email: 'may@mail.com')
 merty = PlayerProfile.create(id: '2', username: 'merty', password: 'password2', password_confirmation: 'password2', email: 'merty@mail.com')
 kevin = PlayerProfile.create(id: '3', username: 'kevin', password: 'password3', password_confirmation: 'password3', email: 'kevin@mail.com')
 crystal = PlayerProfile.create(id: '4', username: 'crystal', password: 'password4', password_confirmation: 'password4', email: 'crystal@mail.com')
@@ -34,7 +34,7 @@ minecraft.save
 
 # Create Player Games (Many-to-Many Relationship)
 PlayerGame.create(player_profile: may, game_posting: valorant)
-PlayerGame.create(player_profile: merty, game_posting: valorant)
+PlayerGame.create(player_profile: merty, game_posting: minecraft)
 PlayerGame.create(player_profile: kevin, game_posting: baldur)
 
 # Create Friends
@@ -42,10 +42,10 @@ Friend.create(player_profile: may, friend: merty, invite_status: 'accepted')
 Friend.create(player_profile: may, friend: kevin, invite_status: 'pending')
 Friend.create(player_profile: merty, friend: kevin, invite_status: 'accepted')
 
-# Create Friendships
-Friendship.create(user: may, friend: merty, invite_status: 'accepted')
-Friendship.create(user: may, friend: kevin, invite_status: 'pending')
-Friendship.create(user: merty, friend: kevin, invite_status: 'accepted')
+# # Create Friendships
+# Friendship.create(user: may, friend: merty, invite_status: 'accepted')
+# Friendship.create(user: may, friend: kevin, invite_status: 'pending')
+# Friendship.create(user: merty, friend: kevin, invite_status: 'accepted')
 
 # Create Player Games
 player_profile = PlayerProfile.first
