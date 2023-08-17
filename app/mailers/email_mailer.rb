@@ -1,6 +1,7 @@
 class EmailMailer < ApplicationMailer
-    def registration_confirmation(user)
-        @user = user
-        mail(to: @user.email, subject: 'Registration Confirmation')
+
+    def registration_confirmation(player_profile)
+        @player_profile = player_profile
+        mail(to: @player_profile.email, subject: 'Registration Confirmation')
       end
-end
+    end
