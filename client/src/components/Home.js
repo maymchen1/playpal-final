@@ -26,8 +26,11 @@ function Home() {
        <ul></ul>
         <button>Friend List</button>
       </Link>
-      {/* Add more buttons and links as needed */}
-    </div>
+      <Link to="/register">
+       <ul></ul>
+        No Account? Register
+      </Link>    
+      </div>
   );
 }
 

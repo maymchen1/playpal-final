@@ -6,12 +6,12 @@ class PlayerProfilesController < ApplicationController
   def index
     @player_profiles = PlayerProfile.all
 
-    render json: @player_profiles, only: [:id, :username, :email]
+    render json: @player_profiles
   end
 
   # GET /player_profiles/1
   def show
-    render json: @player_profile, only: [:id, :username, :email]
+    render json: @player_profile
   end
 
   # POST /player_profiles
@@ -19,7 +19,11 @@ class PlayerProfilesController < ApplicationController
     @player_profile = PlayerProfile.new(player_profile_params)
 
     if @player_profile.save
-      render json: @player_profile, status: :created, location: @player_profile
+
+        # Trigger the registration confirmation email
+        EmailMailer.registration_confirmation(@player_profile).deliver_now
+  
+      render json: @player_profile, status: :created
     else
       render json: @player_profile.errors, status: :unprocessable_entity
     end
@@ -37,6 +41,7 @@ class PlayerProfilesController < ApplicationController
   # DELETE /player_profiles/1
   def destroy
     @player_profile.destroy
+    render json: { message: "Account deleted successfully" }
   end
 
   private
@@ -50,6 +55,6 @@ class PlayerProfilesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def player_profile_params
-      params.require(:player_profile).permit(:username, :email, :password, :password_confirmation, :email)
+      params.require(:player_profile).permit(:username, :email, :password, :password_confirmation)
     end
 end
