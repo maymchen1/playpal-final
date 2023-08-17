@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 function Home() {
   return (
     <div>
+      <p> ପ(๑•ᴗ•๑)ଓ ♡</p>
         <Link to="/login">
         <ul></ul>
         <button>Login</button>
