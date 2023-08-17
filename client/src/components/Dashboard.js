@@ -5,34 +5,49 @@ const Dashboard = () => {
   const { user, logout } = useAuth();
   const [friends, setFriends] = useState([]);
   const [gamePostings, setGamePostings] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch friends data
-    fetchFriends();
-
-    // Fetch game postings data
-    fetchGamePostings();
-  }, []);
+    if (user) {
+      console.log('User in Dashboard:', user);
+      fetchFriends();
+      fetchGamePostings();
+    }
+  }, [user]);
 
   const fetchFriends = async () => {
     try {
+      console.log('Fetching friends...');
       const response = await fetch(`http://localhost:3000/player_profiles/${user.player_profile_id}/friends`);
       const data = await response.json();
       setFriends(data);
     } catch (error) {
       console.error('Error fetching friends:', error);
+    } finally {
+      setLoading(false); // Set loading to false after fetching data
     }
   };
-
+  
   const fetchGamePostings = async () => {
     try {
+      console.log('Fetching game postings...');
       const response = await fetch(`http://localhost:3000/player_profiles/${user.player_profile_id}/player_games`);
       const data = await response.json();
       setGamePostings(data);
     } catch (error) {
       console.error('Error fetching game postings:', error);
+    } finally {
+      setLoading(false); // Set loading to false after fetching data
     }
   };
+  
+  if (loading) {
+    return <div>Loading...</div>; // Display loading message
+  }
+
+  if (!user) {
+    return <div>Login required</div>; // Display login message
+  }
 
   return (
     <div>

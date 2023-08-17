@@ -4,7 +4,6 @@ class GamePostingsController < ApplicationController
   # GET /game_postings
   def index
     @game_postings = GamePosting.all
-
     render json: @game_postings , only: [:id, :title]
   end
 
@@ -16,7 +15,6 @@ class GamePostingsController < ApplicationController
   # POST /game_postings
   def create
     @game_posting = GamePosting.new(game_posting_params)
-
     if @game_posting.save
       render json: @game_posting, status: :created, location: @game_posting
     else
@@ -36,6 +34,18 @@ class GamePostingsController < ApplicationController
   # DELETE /game_postings/1
   def destroy
     @game_posting.destroy
+  end
+
+  # GET /player_profiles/:player_profile_id/game_postings
+  def game_postings_by_profile
+    @player_profile = PlayerProfile.find_by(id: params[:player_profile_id])
+    
+    if @player_profile
+      @game_postings = @player_profile.game_postings
+      render json: @game_postings, only: [:id, :title]
+    else
+      render json: { error: "Player profile not found" }, status: :not_found
+    end
   end
 
   private
