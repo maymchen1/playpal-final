@@ -19,6 +19,7 @@ const Register = () => {
           username,
           password,
           password_confirmation: passwordConfirmation,
+          email
         },
       }),
     });
