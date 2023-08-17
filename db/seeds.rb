@@ -13,8 +13,6 @@ merty = PlayerProfile.create(id: '2', username: 'merty', password: 'password2', 
 kevin = PlayerProfile.create(id: '3', username: 'kevin', password: 'password3', password_confirmation: 'password3', email: 'kevin@mail.com')
 crystal = PlayerProfile.create(id: '4', username: 'crystal', password: 'password4', password_confirmation: 'password4', email: 'crystal@mail.com')
 
-# ... (rest of the code)
-
 # Create GamePostings with Descriptions
 valorant = GamePosting.create(id: '1',title: 'Valorant')
 description1 = Description.create(id: '1',genre: 'FPS', player_limit: 5, description_text: 'Valorant is a free-to-play first-person tactical hero shooter developed and published by Riot Games, for Windows. Teased under the codename Project A in October 2019, the game began a closed beta period with limited access on April 7, 2020, followed by a release on June 2, 2020.', 
@@ -34,9 +32,20 @@ description_title: 'Cozy Minecraft Run')
 minecraft.description = description3
 minecraft.save
 
+# Create Player Games (Many-to-Many Relationship)
+PlayerGame.create(player_profile: may, game_posting: valorant)
+PlayerGame.create(player_profile: merty, game_posting: valorant)
+PlayerGame.create(player_profile: kevin, game_posting: baldur)
+
 # Create Friends
-Friend.create(id: '1',player_profile_id: may.id, invite_status: 'accepted')
-Friend.create(id: '2',player_profile_id: may.id, invite_status: 'pending')
+Friend.create(player_profile: may, friend: merty, invite_status: 'accepted')
+Friend.create(player_profile: may, friend: kevin, invite_status: 'pending')
+Friend.create(player_profile: merty, friend: kevin, invite_status: 'accepted')
+
+# Create Friendships
+Friendship.create(user: may, friend: merty, invite_status: 'accepted')
+Friendship.create(user: may, friend: kevin, invite_status: 'pending')
+Friendship.create(user: merty, friend: kevin, invite_status: 'accepted')
 
 # Create Player Games
 player_profile = PlayerProfile.first

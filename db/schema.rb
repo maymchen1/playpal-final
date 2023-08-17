@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_16_063454) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_17_002510) do
   create_table "descriptions", force: :cascade do |t|
     t.string "genre"
     t.integer "player_limit"
@@ -28,6 +28,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_16_063454) do
     t.datetime "updated_at", null: false
     t.integer "player_profile_id"
     t.index ["player_profile_id"], name: "index_friends_on_player_profile_id"
+  end
+
+  create_table "friendships", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "friend_id", null: false
+    t.string "invite_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["friend_id"], name: "index_friendships_on_friend_id"
+    t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
   create_table "game_postings", force: :cascade do |t|
@@ -56,6 +66,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_16_063454) do
 
   add_foreign_key "descriptions", "game_postings"
   add_foreign_key "friends", "player_profiles"
+  add_foreign_key "friendships", "friends"
+  add_foreign_key "friendships", "users"
   add_foreign_key "player_games", "game_postings"
   add_foreign_key "player_games", "player_profiles"
 end
